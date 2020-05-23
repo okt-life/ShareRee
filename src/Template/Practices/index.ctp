@@ -6,8 +6,10 @@
 </head>
 <body>
 <?= $this->Form->create(null, ['id'=>'form']) ?>  
-<?= $this->Form->input('name', ['type'=>'text']) ?>  
-<?= $this->Form->submit("送信") ?>
-<?= $this->Form->end() ?>  
+<?= $this->Form->text('name') ?>
+<?= $this->Form->end() ?>
+
+
+
 </body>
 </html>
