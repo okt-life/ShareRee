@@ -4,7 +4,7 @@ $(function () {
         var form = $("#form");
         var param = form.serializeArray();
         console.log(param[1]["value"]);
-        var base_url = "/ShareRee/practices/ajaxTest";
+        var base_url = "/ShareRee/Books/ajaxTest";
         $.ajax({
             url: base_url, //送り先のコントローラーのURL
             type: "POST", //post通信
