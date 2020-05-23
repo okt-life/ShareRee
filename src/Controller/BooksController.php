@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 ini_set('display_errors',1);
-class PracticesController extends AppController{
+class BooksController extends AppController{
    
     public function index(){
 
