@@ -300,6 +300,7 @@ return [
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
 
             'url' => env('DATABASE_URL', null),
+            'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock',
         ],
 
         /**
