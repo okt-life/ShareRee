@@ -76,7 +76,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => env('SECURITY_SALT', '1be3c58cbb6db4015acec809d87a4e446cd917c45184ce32169cc3df0605a7fc'),
+        'salt' => env('SECURITY_SALT', 'bd7580d8de681e659e4402595226be66d1eff48f28e199efbc0384e121fd0482'),
     ],
 
     /**
@@ -264,9 +264,9 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            /* 'username' => 'root',
-            'password' => '',
-            'database' => 'shareree', */
+            //'username' => 'my_app',
+            //'password' => 'secret',
+            //'database' => 'my_app',
             'username' => env('DB_USERNAME'),
             'password' => env('DB_PASSWORD'),
             'database' => env('DB_DATABASE'),
