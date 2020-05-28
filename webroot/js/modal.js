@@ -5,7 +5,7 @@
       if($("modal-overlay")[0]) return false;
       $("body").append('<div id="modal-overlay"></div>');
       $("#modal-overlay").fadeIn("slow");
-      centeringModalWindow();
+
       $("#modal-content").fadeIn("slow");
 
       //↓ここ動作しない（2020.05.18）
@@ -21,6 +21,7 @@
         $("#modal-content").css({"left":pxleft + "px"});
         $("#modal-content").css({"top":pxtop + "px"});
       }
+      centeringModalWindow();
  });
 
  //閉じると背景を押したらウィンドウを閉じる

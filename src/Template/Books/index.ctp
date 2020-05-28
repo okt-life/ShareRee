@@ -8,6 +8,7 @@
 ?>
 <button id="modal-open">登録</button>
 
+
 <div id="modal-content">
 <p>こちらの本でよろしいですか？</p>
 <!--本の画像表示-->

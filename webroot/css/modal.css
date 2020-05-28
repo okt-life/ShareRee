@@ -32,7 +32,7 @@
 }
 /*↑↑ここまで↑↑*/
 
-
+/*モーダルウィンドウ*/
 #modal-overlay {
     display: none;
     height: 120%;
@@ -52,7 +52,9 @@
   	padding:10px 20px;
   	border:2px solid #aaa;
     display: none;
-
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
 }
 
 #decide{
