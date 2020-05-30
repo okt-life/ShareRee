@@ -5,7 +5,6 @@
 /tmp/*
 /vendor/*
 /composer.lock
-
 # OS generated files #
 ######################
 .DS_Store
