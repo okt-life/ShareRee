@@ -6,7 +6,6 @@
  echo $this->Html->script('modal');
  echo $this->Html->css('modal');
 ?>
-<<<<<<< HEAD
 <button id="modal-open">登録</button>
 
 
@@ -72,13 +71,3 @@
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
 </div>
-=======
-
-<?=$this->Form->create(null,['id'=>'Form']); ?>
-<?=$this->Form->text('name'); ?>
-<?=$this->Form->submit('送信',['id' => 'submit']); ?>
-<?=$this->Form->end(); ?>
-
-<p id="text"></p>
-
->>>>>>> develop
