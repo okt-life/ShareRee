@@ -7,7 +7,7 @@ namespace App\Utils;
 class AppUtility
 {
     /*
-     * function 
+     * function
      */
     public static function add($val1, $val2){
         return ($val1 + $val2);
