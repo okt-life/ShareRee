@@ -54,7 +54,7 @@
     display: none;
     position: absolute;
     top: 50%;
-    transform: translate(0,-50%);
+    transform: translate(50%,-50%);
 }
 
 #decide{
@@ -68,4 +68,28 @@
 
 #modal-open{
     float: right;
+}
+.hide {
+    display: none;
+  }
+  .loading {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    background: rgba(0,0,0,.5);
+    background-image: url(../img/loading.gif);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: 150px 150px;
+  }
+
+  #book-img{
+      padding: 20px;
+  }
+  #book-img a{
+    margin: 20px;
 }
