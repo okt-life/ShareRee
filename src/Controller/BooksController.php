@@ -8,9 +8,6 @@ class BooksController extends AppController
 
     public function index()
     {
-<<<<<<< HEAD
-
-=======
         /* $this->setAction('test');  */
     }
 
@@ -31,6 +28,5 @@ class BooksController extends AppController
             $this->log($thumbnails);
             $this->response->body(json_encode($thumbnails));
         }
->>>>>>> c4f0424... ajax
     }
 }
