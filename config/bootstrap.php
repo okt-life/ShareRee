@@ -56,7 +56,7 @@ use Cake\Utility\Security;
  if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
      $dotenv = new \josegonzalez\Dotenv\Loader([CONFIG . '.env']);
      $dotenv->parse()
-         ->putenv()
+         ->putenv(true)
          ->toEnv()
          ->toServer();
  }
