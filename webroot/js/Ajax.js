@@ -1,3 +1,5 @@
+import {  } from "exportclass";
+
 $(function () {
     $("#submit").on('click', function () {
         var form = $(this).parents("Form");
