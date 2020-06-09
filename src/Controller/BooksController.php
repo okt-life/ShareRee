@@ -27,8 +27,7 @@ class BooksController extends AppController
                 // サムネ画像
                 $thumbnails[] = $book->volumeInfo->imageLinks->thumbnail;
             }
-            $this->log($thumbnails);
-            $this->response->body(json_encode($thumbnails));
+            $this->response->body(json_encode($results));
         }
     }
 }

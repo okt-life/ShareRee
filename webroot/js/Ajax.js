@@ -1,3 +1,32 @@
+//GoogleBooksApiの処理に関するクラス
+class Googlebooksapi{
+    
+    constructor(data){
+        this.data=data;
+        this.authors=data['items'][1]['volumeInfo']['authors'];
+    }
+    getImage(count){
+        for(var i=0;i<count;i++){
+            this.ImageLink=this.data['items'][i]['volumeInfo']['imageLinks']['thumbnail'];
+            $('#book-img').append('<a href="#"><img src=' + this.ImageLink + '></a>');
+        }
+    }
+    getTitle(count){
+        this.title=data['items'][count]['volumeInfo']['title'];
+        return this.title;
+    }
+    getdescription(count){
+        this.description=data['items'][count]['volumeInfo']['description'];
+        return this.description;
+    }
+    getPublisher(count){
+        this.publisher=data['items'][count]['volumeInfo']['publisher'];
+        return this.publisher;    
+    }
+
+}
+
+//Ajax処理
 $(function () {
     $("#submit").on('click', function () {
         var form = $(this).parents("Form");
@@ -17,12 +46,10 @@ $(function () {
         }).done(function (data) {
             $('#book-img').empty();
             $('.loading').addClass('hide');
-            console.log(data);
             // 通信成功時の処理
-            var count = data.length;
-            for (var i = 0; i < count; i++) {
-                $('#book-img').append('<a href="#"><img src=' + data[i] + '></a>');
-            }
+            var count = data['items'].length;
+            var api=new Googlebooksapi(data);
+            api.getImage(count);
         }).fail(function (jqXHR, textStatus, errorThrown) {
             // 通信失敗時の処理
             alert('ファイルの取得に失敗しました。');
