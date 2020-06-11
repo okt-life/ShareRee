@@ -1,27 +1,38 @@
 //GoogleBooksApiの処理に関するクラス
-class Googlebooksapi{
-    
-    constructor(data){
-        this.data=data;
-        this.authors=data['items'][1]['volumeInfo']['authors'];
+class Googlebooksapi {
+
+    constructor(data) {
+        this.data = data;
     }
-    getImage(count){
-        for(var i=0;i<count;i++){
-            this.ImageLink=this.data['items'][i]['volumeInfo']['imageLinks']['thumbnail'];
-            $('#book-img').append('<a href="#"><img src=' + this.ImageLink + '></a>');
+    showBooks(count) {
+        for (var i = 0; i < count; i++) {
+            //本のリンクを取得
+            this.ImageLink = this.data['items'][i]['volumeInfo']['imageLinks']['thumbnail'];
+            //本ごとに要素を作成
+            $('#book-img').append('<div class="books book-ele' + i + '"></div>');
+            //aタグで本の画像を表示
+            $('.book-ele' + i).append('<a href="#"><img src=' + this.ImageLink + '></a>');
+            this.getTitle(i);
+            this.getdescription(i);
+            this.getPublisher(i);
         }
     }
-    getTitle(count){
-        this.title=data['items'][count]['volumeInfo']['title'];
-        return this.title;
+    getTitle(i) {
+        this.title = this.data['items'][i]['volumeInfo']['title'];
+        $('.book-ele' + i).append('<p>' + this.title + '</p>');
     }
-    getdescription(count){
-        this.description=data['items'][count]['volumeInfo']['description'];
-        return this.description;
+    getdescription(i) {
+        this.description = this.data['items'][i]['volumeInfo']['description'];
+        $('.book-ele' + i).append('<p>' + this.description + '</p>');
     }
-    getPublisher(count){
-        this.publisher=data['items'][count]['volumeInfo']['publisher'];
-        return this.publisher;    
+    getPublisher(i) {
+        this.publisher = this.data['items'][i]['volumeInfo']['publisher'];
+        $('.book-ele' + i).append('<p>' + this.publisher + '</p>');
+    }
+
+    getAuthors(count) {
+        this.authors = data['items'][i]['volumeInfo']['authors'];
+        return this.authors;
     }
 
 }
@@ -37,6 +48,7 @@ $(function () {
             url: base_url, //送り先のコントローラーのURL
             type: "POST", //post通信
             dataType: "json",
+            timeout: 10000,
             data: {
                 'params': param[1]["value"]
             },
@@ -48,8 +60,9 @@ $(function () {
             $('.loading').addClass('hide');
             // 通信成功時の処理
             var count = data['items'].length;
-            var api=new Googlebooksapi(data);
-            api.getImage(count);
+            var api = new Googlebooksapi(data);
+            api.showBooks(count);
+
         }).fail(function (jqXHR, textStatus, errorThrown) {
             // 通信失敗時の処理
             alert('ファイルの取得に失敗しました。');

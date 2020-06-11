@@ -48,6 +48,7 @@
     background: #fff;
     z-index: 2;
     width:50%;
+    height: 80%;
   	margin:1.5em auto 0;
   	padding:10px 20px;
   	border:2px solid #aaa;
@@ -55,6 +56,7 @@
     position: absolute;
     top: 50%;
     transform: translate(50%,-50%);
+    overflow-y: auto;
 }
 
 #decide{
@@ -87,9 +89,9 @@
     background-size: 150px 150px;
   }
 
-  #book-img{
-      padding: 20px;
+  .books{
+    display: inline-block;
+    vertical-align: top;
+    width: 30%;
+    margin: 30px;
   }
-  #book-img a{
-    margin: 20px;
-}
