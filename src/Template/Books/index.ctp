@@ -20,13 +20,12 @@
             <!-- isbnの情報を順に表示 -->
             <?php $isbns = $book["isbn"][0];?>
             <?php foreach($isbns as $isbn); ?>
-            <?php foreach($isbn as $key => $value);  ?>
             <?php if($isbn->type == "ISBN_10"){
                     echo "ISBN10:".$isbn->identifier;
             }elseif($isbn->type == "ISBN_13"){
               echo "ISBN13:".$isbn->identifier;
             }else{
-              echo "ISBNなし";
+              echo "ISBNコードなし";
             }
             ?>
           </p>
