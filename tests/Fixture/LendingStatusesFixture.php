@@ -27,7 +27,7 @@ class LendingStatusesFixture extends TestFixture
         ],
         '_options' => [
             'engine' => 'InnoDB',
-            'collation' => 'utf8_unicode_ci'
+            'collation' => 'utf8_general_ci'
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -43,9 +43,9 @@ class LendingStatusesFixture extends TestFixture
                 'id' => 1,
                 'book_id' => 1,
                 'employee_id' => 1,
-                'from_date' => '2020-05-09',
-                'to_date' => '2020-05-09',
-                'created' => '2020-05-09',
+                'from_date' => '2020-05-13',
+                'to_date' => '2020-05-13',
+                'created' => '2020-05-13',
                 'returned_flag' => 1,
             ],
         ];

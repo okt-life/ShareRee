@@ -8,7 +8,7 @@ namespace App\Utils;
 class AppUtility
 {
     /*
-     * function 
+     * function
      */
     public static function add($data)
     {

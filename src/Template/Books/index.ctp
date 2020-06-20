@@ -1,73 +1,40 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Book[]|\Cake\Collection\CollectionInterface $books
- */
- echo $this->Html->script('modal');
- echo $this->Html->css('modal');
-?>
-<button id="modal-open">登録</button>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>Google Books APIs</title>
+</head>
+<body>
+  <p>全<?php echo $totalCount; ?>件中、<?php echo $get_count; ?>件を表示中</p>
+  <!-- 1件以上取得した書籍情報がある場合 -->
+  <?php if($get_count > 0): ?>
+    <div class="loop_books">
+      <!-- 取得した書籍情報を順に表示 -->
+      <?php foreach($books  as $book):?>
 
+        <div class="loop_books_item">
+          <img src="<?= $book["thumbnail"]; ?>" alt="<?= $book["title"]; ?>"><br />
+          <p>
+            <b>『<?= $book["title"]; ?>』</b><br/>
+            著者：<?= $book["authors"]; ?><br/>
 
-<div id="modal-content">
-<p>こちらの本でよろしいですか？</p>
-<!--本の画像表示-->
-<div class="book-img"><img src=""></div>
-<!--本を選ぶ左右の矢印-->
-<div class="selector"></div>
-<button id="decide" action="post">確定</button>
-<button id="modal-close">閉じる</button>
-</div>
-
-
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Book'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Favorites'), ['controller' => 'Favorites', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Favorite'), ['controller' => 'Favorites', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Lending Statuses'), ['controller' => 'LendingStatuses', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Lending Status'), ['controller' => 'LendingStatuses', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="books index large-9 medium-8 columns content">
-    <h3><?= __('Books') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('employee_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('book_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('comment') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($books as $book): ?>
-            <tr>
-                <td><?= $this->Number->format($book->id) ?></td>
-                <td><?= $book->has('employee') ? $this->Html->link($book->employee->name, ['controller' => 'Employees', 'action' => 'view', $book->employee->id]) : '' ?></td>
-                <td><?= $this->Number->format($book->book_id) ?></td>
-                <td><?= h($book->comment) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $book->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $book->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $book->id], ['confirm' => __('Are you sure you want to delete # {0}?', $book->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
-</div>
+            <!-- isbnの情報を順に表示 -->
+            <?php $isbns = $book["isbn"][0];?>
+            <?php foreach($isbns as $isbn); ?>
+            <?php foreach($isbn as $key => $value);  ?>
+            <?php if($isbn->type == "ISBN_10"){
+                    echo "ISBN10:".$isbn->identifier;
+            }elseif($isbn->type == "ISBN_13"){
+              echo "ISBN13:".$isbn->identifier;
+            }else{
+              echo "ISBNなし";
+            }
+            ?>
+          </p>
+        </div>
+      <?php endforeach; ?>
+    </div><!-- ./loop_books -->
+  <?php else: ?>
+    <p>情報が有りません</p>
+  <?php endif; ?>
+</body>
+</html>
