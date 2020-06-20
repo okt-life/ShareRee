@@ -28,10 +28,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('style.css') ?>
-
+    <?= $this->Html->script('https://code.jquery.com/jquery-3.3.1.js') ?>
+    <?= $this->Html->script('Ajax.js') ?>
+    
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    <?php echo $this->Html->script('jquery-3.5.1.min.js'); ?>
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
