@@ -8,10 +8,13 @@ class Googlebooksapi {
         for (var i = 0; i < count; i++) {
             //本のリンクを取得
             this.ImageLink = this.data['items'][i]['volumeInfo']['imageLinks']['thumbnail'];
+            console.log(this.ImageLink);
             //本ごとに要素を作成
-            $('#book-img').append('<div class="books book-ele' + i + '"></div>');
-            //aタグで本の画像を表示
-            $('.book-ele' + i).append('<a href="#"><img src=' + this.ImageLink + '></a>');
+            $('#book-img').append('<div class="book-card book-ele' + i + '" style="width：15rem;"></div>');
+            //本の画像を表示させるaタグをbook-eleクラスの要素に追加
+            $('.book-ele' + i).append('<img class="card-img-top " src=' + this.ImageLink + '></a>');
+            $('.book-ele' + i).append('<div class="card-body' + i + '"></div>');
+            $().append('<div class="card-body' + i + '"></div>');
             this.getTitle(i);
             this.getdescription(i);
             this.getPublisher(i);
@@ -19,20 +22,20 @@ class Googlebooksapi {
     }
     getTitle(i) {
         this.title = this.data['items'][i]['volumeInfo']['title'];
-        $('.book-ele' + i).append('<p>' + this.title + '</p>');
+        $('.card-body' + i).append('<h5 class=" card-title ">' + this.title + '</h5>');
     }
     getdescription(i) {
         this.description = this.data['items'][i]['volumeInfo']['description'];
-        $('.book-ele' + i).append('<p>' + this.description + '</p>');
+        $('.card-body' + i).append('<h6 class=" card-subtitle text-muted">' + this.description + '</h6>');
     }
     getPublisher(i) {
         this.publisher = this.data['items'][i]['volumeInfo']['publisher'];
-        $('.book-ele' + i).append('<p>' + this.publisher + '</p>');
+        $('.card-body' + i).append('<p class=" card-text ">' + this.publisher + '</p>');
     }
 
-    getAuthors(count) {
+    getAuthors(i) {
         this.authors = data['items'][i]['volumeInfo']['authors'];
-        return this.authors;
+        $('.card-body' + i).append('<p class=" card-text ">' + this.publisher[0] + '</p>');
     }
 
 }
