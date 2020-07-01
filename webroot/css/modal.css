@@ -31,7 +31,10 @@
 
 }
 /*↑↑ここまで↑↑*/
-
+img {
+  max-width: 100%;
+  height: auto;
+}
 /*モーダルウィンドウ*/
 #modal-overlay {
     display: none;
@@ -47,14 +50,18 @@
 #modal-content{
     background: #fff;
     z-index: 2;
-    width:50%;
   	margin:1.5em auto 0;
   	padding:10px 20px;
   	border:2px solid #aaa;
     display: none;
     position: absolute;
-    top: 50%;
-    transform: translate(0,-50%);
+    /* transform: translate(50%,-50%); */
+    overflow-y: auto;
+    max-height:80% ;
+}
+.book-card{
+  max-width: 30%;
+  max-height: 30%;
 }
 
 #decide{
@@ -69,3 +76,21 @@
 #modal-open{
     float: right;
 }
+.hide {
+    display: none;
+  }
+  .loading {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    background: rgba(0,0,0,.5);
+    background-image: url(../img/loading.gif);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: 150px 150px;
+  }
+

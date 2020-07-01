@@ -5,7 +5,8 @@ class Googlebooksapi {
 
 
     public function __construct($params){
-        $this->params = $params[];
+        $this->isbn = $params[];
+        
 
         // 1ページあたりの取得件数
         $maxResults = 10;

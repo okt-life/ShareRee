@@ -1,37 +1,52 @@
 <?php
+
 namespace App\Controller;
+
 use App\Controller\AppController;
 use App\Utils\GoogleBookApiUtility;
+use Cake\ORM\TableRegistry;
+use Exception;
 
 class BooksController extends AppController
 {
+    public function initialize()
+    {
+        $this->name = 'books';
+    }
     public function index()
     {
-        //フォームから値を受け取る場合
-        //$if(isset($_POST['isbn'])){
-            // $params = array(
-            //     'isbn' => $_POST['isbn'],
-            // );
-
-            //今回はフォームがないため、直接値を入力
+    }
+    public function googlebooks()
+    {
+        $this->autoRender = false;
+        if ($this->request->is('ajax')) {
+            $data = $this->request->getData();
             $params = array(
-                'q' => "冨田",
-                'isbn' => "",
+                'q' => $data['params'],
+                'isbn' => ""
             );
-            //インスタンスを作成
             $info = new GoogleBookApiUtility($params);
-            // isbnに対する検索結果の全体の件数を取得
-            $totalCount = $info->getTotalCount();
-            //isbnに対する実際に取得した件数
+            //$totalCount = $info->getTotalCount();
             $get_count = $info->getCount();
-            // 書籍情報を取得
-            $books[] = $info->insertInfo();
-       // }
+            $books = $info->insertInfo();
 
-        //index.ctpに値を渡す
-        $this->set('totalCount',$totalCount);
-        $this->set('get_count',$get_count);
-        $this->set('books', $books[0]);
-
+            //book_infoテーブルに書き込み
+            /*
+            $booksTable = TableRegistry::get('BookInfos');
+            for ($i = 0; $i < $get_count; $i++) {
+                $book = $booksTable->newEntity();
+                $book->title = $books[$i]['title'];
+                $book->authors = $books[$i]['authors'];
+                //$book->isbn_10 = $books[0][$i]['isbn'][0][1]->identifier;
+                //$book->isbn_13 = $books[0][$i]['isbn'][0][0]->identifier;
+                $book->image_links = $books[$i]['thumbnail'];
+                $book->description = $books[$i]['description'];
+                $book->published_date = $books[$i]['publishDate'];
+                $book->page_count = $books[$i]['pageCount'];
+                $booksTable->save($book);
+            }
+            */
+            $this->response->body(json_encode($books, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+        }
     }
 }
