@@ -3,14 +3,19 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\BookInfo;
 use App\Utils\GoogleBookApiUtility;
 use Cake\ORM\TableRegistry;
 use Exception;
 
 class BooksController extends AppController
 {
+    public $paginate = [
+        'limit' => 3 // 1ページに表示するデータ件数
+    ];
     public function initialize()
     {
+        $this->set('book', $this->paginate());
         $this->name = 'books';
     }
     public function index()
@@ -18,6 +23,7 @@ class BooksController extends AppController
     }
     public function googlebooks()
     {
+        $this->set('book', $this->paginate());
         $this->autoRender = false;
         if ($this->request->is('ajax')) {
             $data = $this->request->getData();
@@ -32,7 +38,8 @@ class BooksController extends AppController
             array_push($books, $get_count);
             array_push($books, $totalCount);
             //book_infoテーブルに書き込み
-            /*
+            $this->log($books);
+
             $booksTable = TableRegistry::get('BookInfos');
             for ($i = 0; $i < $get_count; $i++) {
                 $book = $booksTable->newEntity();
@@ -45,8 +52,9 @@ class BooksController extends AppController
                 $book->published_date = $books[$i]['publishDate'];
                 $book->page_count = $books[$i]['pageCount'];
                 $booksTable->save($book);
+                
             }
-            */
+
             $this->response->body(json_encode($books, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
         }
     }

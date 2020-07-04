@@ -17,6 +17,7 @@ class GoogleBookApiUtility
     public function __construct($params)
     {
         $this->params = $params;
+        //$this->startIndex=
     }
 
     //URLの作成

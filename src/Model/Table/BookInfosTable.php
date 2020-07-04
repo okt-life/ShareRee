@@ -1,6 +1,8 @@
 <?php
-namespace App\Model\Table;
 
+namespace App\Model\Table;
+//use Cake\Event\Event;
+use Cake\Datasource\EntityInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -91,5 +93,15 @@ class BookInfosTable extends Table
             ->allowEmptyString('page_count');
 
         return $validator;
+    }
+
+    public function beforeSave(Event $event, EntityInterface $entity, $option)
+    {
+        $n = $this->find('all',['conditions'=>['title'=>$entity->title]])->count();
+        if($n==0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

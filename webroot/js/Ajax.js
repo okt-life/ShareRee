@@ -42,10 +42,12 @@
 }
 //Ajax処理
 $(function () {
-    $("#submit").on('click', function () {
+    $(".submit").on('click', function () {
         $('#book-contents').empty();
         var form = $(this).parents("Form");
+        
         var param = form.serializeArray();
+        console.log(param);
         var base_url = "/ShareRee/books/googlebooks";
         $.ajax({
             url: base_url, //送り先のコントローラーのURL
