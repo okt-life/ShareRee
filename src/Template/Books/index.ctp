@@ -13,6 +13,11 @@
     <p>こちらの本でよろしいですか？</p>
     <button id="decide" action="post">確定</button>
     <button id="modal-close">閉じる</button>
+    <div id="book-contents">
+
   </div>
+  </div>
+  
+
 </body>
 </html>

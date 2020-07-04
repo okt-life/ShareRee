@@ -1,5 +1,5 @@
 //GoogleBooksApiの処理に関するクラス
-/* class Googlebooksapi {
+ class Googlebooksapi {
 
     constructor(data) {
         this.data = data;
@@ -7,39 +7,39 @@
     showBooks(count) {
         for (var i = 0; i < count; i++) {
             //本のリンクを取得
-            this.ImageLink = this.data['items'][i]['volumeInfo']['imageLinks']['thumbnail'];
+            this.ImageLink = this.data[i]['thumbnail'];
             console.log(this.ImageLink);
             //本ごとに要素を作成
-            $('#book-img').append('<div class="book-card book-ele' + i + '" style="width：15rem;"></div>');
+            $('#book-contents').append('<div class="book-card book-ele' + i + '" style="width：15rem;"></div>');
             //本の画像を表示させるaタグをbook-eleクラスの要素に追加
             $('.book-ele' + i).append('<img class="card-img-top " src=' + this.ImageLink + '></a>');
             $('.book-ele' + i).append('<div class="card-body' + i + '"></div>');
             $().append('<div class="card-body' + i + '"></div>');
             this.getTitle(i);
             this.getdescription(i);
-            this.getPublisher(i);
+            this.getAuthors(i);
         }
     }
     getTitle(i) {
-        this.title = this.data['items'][i]['volumeInfo']['title'];
+        this.title = this.data[i]['title'];
         $('.card-body' + i).append('<h5 class=" card-title ">' + this.title + '</h5>');
     }
     getdescription(i) {
-        this.description = this.data['items'][i]['volumeInfo']['description'];
+        this.description = this.data[i]['description'];
         $('.card-body' + i).append('<h6 class=" card-subtitle text-muted">' + this.description + '</h6>');
     }
+    /*
     getPublisher(i) {
-        this.publisher = this.data['items'][i]['volumeInfo']['publisher'];
+        this.publisher = this.data[i]['publisher'];
         $('.card-body' + i).append('<p class=" card-text ">' + this.publisher + '</p>');
     }
-
+    */
     getAuthors(i) {
-        this.authors = data['items'][i]['volumeInfo']['authors'];
-        $('.card-body' + i).append('<p class=" card-text ">' + this.publisher[0] + '</p>');
+        this.authors = this.data[i]['authors'];
+        $('.card-body' + i).append('<p class=" card-text ">' + this.authors + '</p>');
     }
 
 }
- */
 //Ajax処理
 $(function () {
     $("#submit").on('click', function () {
@@ -58,11 +58,12 @@ $(function () {
                 $('.loading').removeClass('hide');
             }
         }).done(function (data) {
-           console.log(data);
+            console.log(data);
             $('.loading').addClass('hide');
-            return false;
-            //console.log($('body').html(data));
-           
+            var api=new Googlebooksapi(data);
+            api.showBooks(data[data.length-2]);
+            console.log(data[data.length-2]);
+
         }).fail(function (jqXHR, textStatus, errorThrown) {
             // 通信失敗時の処理
             alert('ファイルの取得に失敗しました。');

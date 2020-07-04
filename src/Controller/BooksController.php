@@ -26,10 +26,11 @@ class BooksController extends AppController
                 'isbn' => ""
             );
             $info = new GoogleBookApiUtility($params);
-            //$totalCount = $info->getTotalCount();
+            $totalCount = $info->getTotalCount();
             $get_count = $info->getCount();
             $books = $info->insertInfo();
-
+            array_push($books, $get_count);
+            array_push($books, $totalCount);
             //book_infoテーブルに書き込み
             /*
             $booksTable = TableRegistry::get('BookInfos');
