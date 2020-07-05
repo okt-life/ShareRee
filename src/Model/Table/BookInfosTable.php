@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Model\Table;
-//use Cake\Event\Event;
+use Cake\Event\Event;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
@@ -98,7 +98,8 @@ class BookInfosTable extends Table
     public function beforeSave(Event $event, EntityInterface $entity, $option)
     {
         $n = $this->find('all',['conditions'=>['title'=>$entity->title]])->count();
-        if($n==0){
+
+        if($n==0 && $entity->isbn_10!="" && $entity->isbn_13!=""){
             return true;
         }else{
             return false;

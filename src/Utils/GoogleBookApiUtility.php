@@ -67,7 +67,8 @@ class GoogleBookApiUtility
         //三項演算子
         $authors = isset($info->volumeInfo->authors) ? implode(",", $info->volumeInfo->authors) : "著者名未登録";
         $thumbnail = isset($info->volumeInfo->imageLinks->thumbnail)?$info->volumeInfo->imageLinks->thumbnail:"";
-        //$isbn = $info->volumeInfo->industryIdentifiers;
+        $isbn_10 = isset($info->volumeInfo->industryIdentifiers[0]->identifier)?$info->volumeInfo->industryIdentifiers[0]->identifier:"";
+        $isbn_13 = isset($info->volumeInfo->industryIdentifiers[1]->identifier)?$info->volumeInfo->industryIdentifiers[1]->identifier:"";
         $description = isset($info->volumeInfo->description)?$info->volumeInfo->description:"";
         $publishedDate = isset($info->volumeInfo->publishedDate)?$info->volumeInfo->publishedDate:"";
         $pageCount = isset($info->volumeInfo->pageCount)?$info->volumeInfo->pageCount:"";
@@ -76,7 +77,8 @@ class GoogleBookApiUtility
             'title' => $title,
             'authors' => $authors,
             'thumbnail' => $thumbnail,
-            //"isbn" => $isbn,
+            "isbn_10" => $isbn_10,
+            "isbn_13" => $isbn_13,
             'description' => $description,
             'publishDate' => $publishedDate,
             'pageCount' => $pageCount
@@ -95,6 +97,7 @@ class GoogleBookApiUtility
         foreach ($datas as $data) {
             array_push($result, $this->specificInfo($data));
         }
+        
         return $result;
     }
 
