@@ -57,19 +57,18 @@ class BooksController extends AppController
                     $book->word = $params['q'];
                     $booksTable->save($book);
                 }
-                $this->response->body(json_encode($books, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-            }else{
-                //ある場合はDBから表示
-                $books=$booksTable->find('all',['conditions'=>['word' => $params['q']]])->toArray();
+            }
+                //DBから表示
+                $books_display=$booksTable->find('all',['conditions'=>['word' => $params['q']]])->toArray();
                 $books_cnt=$booksTable->find('all',['conditions'=>['word' => $params['q']]])->count();
-                array_push($books,$books_cnt);
+                array_push($books_display,$books_cnt);
                 $this->log($books_cnt);
-                $this->response->body(json_encode($books, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+                $this->response->body(json_encode($books_display, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
             }
 
 
 
             
-        }
+        
     }
 }

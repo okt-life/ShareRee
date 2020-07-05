@@ -7,7 +7,7 @@
     showBooks(count) {
         for (var i = 0; i < count; i++) {
             //本のリンクを取得
-            this.ImageLink = this.data[i]['thumbnail'];
+            this.ImageLink = this.data[i]['image_links'];
             console.log(this.ImageLink);
             //本ごとに要素を作成
             $('#book-contents').append('<div class="book-card book-ele' + i + '" style="width：15rem;"></div>');
@@ -63,9 +63,10 @@ $(function () {
         }).done(function (data) {
             console.log(data);
             $('.loading').addClass('hide');
+            //console.log(data[0]['image_links']);
             var api=new Googlebooksapi(data);
-            api.showBooks(data[data.length-2]);
-            console.log(data[data.length-2]);
+            api.showBooks(data[data.length-1]);
+            
 
         }).fail(function (jqXHR, textStatus, errorThrown) {
             // 通信失敗時の処理
